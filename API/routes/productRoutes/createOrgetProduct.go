@@ -33,7 +33,7 @@ func CreateOrGetProduct(c *fiber.Ctx) error {
 	if err := tx.Where("name = ?", product.Name).First(&existingProduct).Error; err == nil {
 		// Rollback the transaction if the product already exists
 		tx.Rollback()
-		return c.Status(200).JSON("Product already exists")
+		return c.Status(200).JSON(existingProduct)
 	}
 
 	// Run Python script if product doesn't exist

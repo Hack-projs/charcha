@@ -6,6 +6,7 @@ import (
 	"charcha-api/routes/userRoutes"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 )
 
 func SetupRoutes(app *fiber.App) {
@@ -33,6 +34,10 @@ func main() {
 	app.Get("/", func(c *fiber.Ctx) error {
 		return c.SendString("Hello, World!")
 	})
+
+	app.Use(cors.New(cors.Config{
+		AllowOrigins: "*",
+	}))
 
 	SetupRoutes(app)
 
