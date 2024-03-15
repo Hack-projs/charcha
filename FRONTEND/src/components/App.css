@@ -125,3 +125,12 @@
   height: fit-content;
   width: fit-content;
 } */
+
+.profile-cont{
+  transition: all 0.3s ease;
+}
+.profile-cont:hover{
+  transform: scale(1.03); /* Magnify on hover */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Add shadow on hover */
+  cursor: pointer;
+}
