@@ -34,7 +34,7 @@ def start_scrape(inputtext):
     topic_to_scrape = inputtext
     num_pages_to_scrape = 10
     comments = scrape_reddit_comments(topic_to_scrape, num_pages_to_scrape)
-    csv_filename = 'reddit_comments.csv'
+    csv_filename = 'charcha/WEBWORKFLOW/reddit_comments.csv'
     save_to_csv(comments, csv_filename)
     print(f"Comments saved to {csv_filename}.")
 #--------------------------------------------------REDDIT SCRAPER ENDS HERE --------------------------------------------------#
