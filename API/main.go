@@ -2,7 +2,8 @@ package main
 
 import (
 	"charcha-api/database"
-	"charcha-api/routes"
+	"charcha-api/routes/productRoutes"
+	"charcha-api/routes/userRoutes"
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -15,8 +16,15 @@ func main() {
 		return c.SendString("Hello, World!")
 	})
 	//user routes
-	app.Post("/user", routes.CreateUser)
-	app.Get("/user/:id", routes.GetService)
-	app.Delete("/user/:id", routes.DeleteService)
+	app.Post("/user", userRoutes.CreateUser)
+	app.Get("/user/:id", userRoutes.GetService)
+	app.Delete("/user/:id", userRoutes.DeleteService)
+
+	//product routes
+	app.Post("/product", productRoutes.CreateOrGetProduct)
+	app.Get("/product/:id", productRoutes.GetProduct)
+	app.Put("/product/:id", productRoutes.UpdateProduct)
+
 	app.Listen(":3000")
+
 }
