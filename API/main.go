@@ -23,6 +23,7 @@ func main() {
 	//product routes
 	app.Post("/product", productRoutes.CreateOrGetProduct)
 	app.Get("/product/:id", productRoutes.GetProduct)
+	app.Put("/product/:id", productRoutes.UpdateProduct)
 
 	app.Listen(":3000")
 
