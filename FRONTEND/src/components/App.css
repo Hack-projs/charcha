@@ -1,8 +1,3 @@
-body{
-  /* background-image: url('https://www.shutterstock.com/image-vector/female-avatar-set-no-faces-260nw-1894548661.jpg'); */
-  /* background-image: url('../profile-icon-male-and-female-avatar-woman-man-cartoon-portrait-mix-HE2G04.jpg'); */
-  /* background-color: antiquewhite; */
-}
 
 .home-cont {
   padding: 0.5%;
@@ -117,13 +112,11 @@ body{
 
 .sub-head-cont{
   display: flex;
+  justify-content: space-between;
 }
 .border-cont{
   display: flex;
-  justify-content: center;
-
-  
-  
+  justify-content: center; 
 }
 /* .border-div{
   border: 2px solid black;
