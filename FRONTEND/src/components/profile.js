@@ -1,17 +1,17 @@
-import { React, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { AgChartsReact } from 'ag-charts-react'; // Import removed to resolve warning
-import './App.css';
-import arrowB from '../arrow-up-right-svgrepo-com.svg';
-import arrowW from '../arrow-up-right-svgrepo-com (1).svg';
-import profileimg from '../components/bakg.png';
-import User from '../user-circle-svgrepo-com.svg';
+import { AgChartsReact } from 'ag-charts-react';
+import { createProduct } from '../integration/productRoutes';
 import ReactPlayer from 'react-player';
-import animation from '../Dribbble-Analyse (2).mp4';
-
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
+import CircularProgress from '@mui/material/CircularProgress';
+import User from '../user-circle-svgrepo-com.svg';
+import arrowB from '../arrow-up-right-svgrepo-com.svg';
+import arrowW from '../arrow-up-right-svgrepo-com (1).svg';
+import profileimg from '../components/bakg.png';
+import animation from '../Dribbble-Analyse (2).mp4';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -54,27 +54,59 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }));
 
-function Profile() {
-    const [searchValue,setSearchValue] = useState(" ");
-    const [chartType, setChartType] = useState(null);
-    // Removed unused useEffect hook
+const LoadingOverlay = styled('div')({
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    background: 'rgba(255, 255, 255, 0.7)',
+    zIndex: 9999,
+});
 
-    // Removed unused chartOptions and setChartOptions
-    const handlecall = (e) => {
-        if (e.key === 'Enter') {
-          e.preventDefault();
-        //   fetchWeather(city);
-        const productinfo = createP
+function Profile() {
+    const [searchValue, setSearchValue] = useState("");
+    const [chartType, setChartType] = useState(null);
+    const [chartData, setChartData] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [productName, setProductName] = useState("analysis");
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    const fetchData = async (searchQuery) => {
+        setLoading(true);
+        try {
+            const productInfo = await createProduct(searchQuery || "analysis");
+            console.log(productInfo);
+            setProductName(productInfo.name); // Assuming name is a property in productInfo
+            const chartData = [
+                { review: 'Positive', frequency: productInfo.positive_rating },
+                { review: 'Neutral', frequency: productInfo.neutral_rating },
+                { review: 'Negative', frequency: productInfo.negative_rating },
+            ];
+            setChartData(chartData);
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        } finally {
+            setLoading(false);
         }
-      };
+    };
+
+    const handleCall = (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            fetchData(searchValue);
+        }
+    };
 
     const renderBarChart = () => {
         const chartOptions = {
-            data: [
-                { review: 'Positive', x_position: 2.3, frequency: 162000 },
-                { review: 'Neutral', x_position: 6.3, frequency: 302000 },
-                { review: 'Negative', x_position: 16.2, frequency: 800000 },
-            ],
+            data: chartData,
             series: [{ type: 'bar', xKey: 'review', yKey: 'frequency' }],
         };
         return <AgChartsReact options={chartOptions} />;
@@ -82,16 +114,12 @@ function Profile() {
 
     const renderPieChart = () => {
         const chartOptions = {
-            data: [
-                { asset: 'Positive', amount: 162000 },
-                { asset: 'Neutral', amount: 302000 },
-                { asset: 'Negative', amount: 800000 },
-            ],
+            data: chartData,
             series: [
                 {
                     type: 'pie',
-                    calloutLabelKey: 'asset',
-                    angleKey: 'amount',
+                    calloutLabelKey: 'review',
+                    angleKey: 'frequency',
                 },
             ],
         };
@@ -99,24 +127,18 @@ function Profile() {
     };
 
     const renderAnimation = () => {
-
         return (
             <div style={{ borderRadius: '20px', overflow: 'hidden', marginTop: "10px" }}>
                 <ReactPlayer
-                    //url="https://cdn.dribbble.com/users/8779526/screenshots/16634851/media/5fde2627668db81fd25b315de076bfd1.mp4"
                     url={animation}
-                    controls={false} // Remove controls
-                    autoPlay  // Autoplay the video
+                    controls={false}
+                    autoPlay
                     loop
                     width="100%"
                     height="100%"
-
-
                 />
             </div>
         );
-        // Return the animation SVG here
-
     };
 
     return (
@@ -159,30 +181,35 @@ function Profile() {
                                                 placeholder="Search…"
                                                 inputProps={{ 'aria-label': 'search' }}
                                                 value={searchValue}
-                                                onChange={setSearchValue}
-                                                onKeyPress={handlecall}
+                                                onChange={(e) => setSearchValue(e.target.value)}
+                                                onKeyPress={handleCall}
                                             />
                                         </Search>
 
                                     </div>
-                                    <div className='child-row1' style={{ border: 'solid 2px black', height: "71%" }}>
+                                    <div className='child-row1' style={{ border: 'solid 2px black', height: "71%", position: 'relative' }}>
                                         <div className='sub-head-cont'>
-                                            <h2>analysis</h2>
+                                            <h2>{productName}</h2>
                                             <img src={arrowB} style={{ height: "60px", marginLeft: "50%" }} />
                                         </div>
                                         <button onClick={() => setChartType('pie')} style={{ backgroundColor: "rgb(173, 255, 0)", fontSize: "16px", fontWeight: "bolder", marginBottom: "1px", marginTop: "2px" }}>Pie Chart</button>
                                         <button onClick={() => setChartType('bar')} style={{ backgroundColor: "rgb(173, 255, 0)", fontSize: "16px", fontWeight: "bolder" }}>Bar Chart</button>
 
+                                        {loading && (
+                                            <LoadingOverlay>
+                                                <CircularProgress />
+                                            </LoadingOverlay>
+                                        )}
                                         <div className='graph-cont' style={{ height: "55%" }}>
-                                            {chartType === 'pie' ? renderPieChart() : (chartType === 'bar' ? renderBarChart() : renderAnimation())}                                        </div>
+                                            {!loading && (
+                                                chartType === 'pie' ? renderPieChart() : (chartType === 'bar' ? renderBarChart() : renderAnimation())
+                                            )}
+                                        </div>
 
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-
-
                     </div>
                 </header>
             </div>
