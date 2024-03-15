@@ -55,10 +55,18 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 function Profile() {
+    const [searchValue,setSearchValue] = useState(" ");
     const [chartType, setChartType] = useState(null);
     // Removed unused useEffect hook
 
     // Removed unused chartOptions and setChartOptions
+    const handlecall = (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+        //   fetchWeather(city);
+        const productinfo = createP
+        }
+      };
 
     const renderBarChart = () => {
         const chartOptions = {
@@ -91,6 +99,7 @@ function Profile() {
     };
 
     const renderAnimation = () => {
+
         return (
             <div style={{ borderRadius: '20px', overflow: 'hidden', marginTop: "10px" }}>
                 <ReactPlayer
@@ -124,7 +133,7 @@ function Profile() {
                                     </Link>
                                     <div id="signInDiv"></div>
                                     <div>
-                                        <h3 style={{ marginTop: "15%" }}>Hi, sham</h3>
+                                        <h3 style={{ marginTop: "25px", marginLeft: "-150px", marginRight: "15px" }}>Hi, shambhavi</h3>
                                     </div>
                                 </div>
                             </div>
@@ -136,7 +145,7 @@ function Profile() {
                                             <img src={arrowW} style={{ height: "60px", marginLeft: "53%" }} />
                                         </div>
                                         Our project, "charcha" aims to provide companies and creators with a tool to accurately get an Idea of the overall customer reception and public opinion of their product(songs,game,movies,books) . Providing better insights by aggregating data from various sources, such as user reviews, ratings and social media mentions(x, threads ,imd, goodreads  etc.). This will further enable users to make informed decisions about which product to push and marketing flaws.
-                                        We plan to create a subscription model for webscraping the sites using an ml model for processing the user sentiment and displaying it to the user in informative formats like charts graphs and statistics.
+                                        We plan to create a subscription model for webscraping the sites using an ml model for processing the user sentiment and displaying it to the user in informative formats like charts graphs and statistics.
                                     </div>
                                 </div>
                                 <div className='row2' style={{ flex: "50%" }}>
@@ -149,7 +158,9 @@ function Profile() {
                                             <StyledInputBase
                                                 placeholder="Search…"
                                                 inputProps={{ 'aria-label': 'search' }}
-
+                                                value={searchValue}
+                                                onChange={setSearchValue}
+                                                onKeyPress={handlecall}
                                             />
                                         </Search>
 
