@@ -1,11 +1,27 @@
 import axios from 'axios';
-
-BASE_URL = 'https://7b14-136-233-9-98.ngrok-free.app/';
+const BASE_URL = 'https://5cb2-136-233-9-98.ngrok-free.app';
 
 const getUser = async (userId) => {
-    const response = await axios.get(`user/${userId}`);
+    const response = await axios.get(`${BASE_URL}/user/${userId}`,{
+        headers: {
+            'Content-Type': 'application/json',
+            'ngrok-skip-browser-warning': 'true'
+        }
+    });
     console.log(response.data);
     return response.data;
 }
 
-export { getUser };
+const createUser = async (user) => {
+    const response = await axios.post(`${BASE_URL}/user`, user, {
+        headers: {
+            'Content-Type': 'application/json',
+            'ngrok-skip-browser-warning': 'true'
+        }
+    });
+    console.log(response.data);
+    return response.data;
+}   
+
+
+export { getUser ,createUser };
