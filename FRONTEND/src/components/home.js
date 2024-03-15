@@ -4,15 +4,14 @@ import { Link } from 'react-router-dom';
 import arrowB from '../arrow-up-right-svgrepo-com.svg';
 import arrowW from '../arrow-up-right-svgrepo-com (1).svg';
 import profileimg from '../components/bakg.png';
-// import User from '../user-circle-svgrepo-com.svg';
 import { jwtDecode } from 'jwt-decode';
 
 const google = window.google;
 
 function Home() {
   const [isGoogleScriptLoaded, setIsGoogleScriptLoaded] = useState(false);
-
   const [user, setUser] = useState({});
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     const script = document.createElement('script');
@@ -48,12 +47,20 @@ function Home() {
     var userObject = jwtDecode(response.credential);
     console.log(userObject);
     setUser(userObject);
-    document.getElementById("signInDiv").hidden = true;
+    setIsLoggedIn(true);
+    const signInDiv = document.getElementById("signInDiv");
+    if(signInDiv){    
+      signInDiv.hidden = true;
+    }
   }
 
-  function handleSignOut(e) {
-    setUser({})
-    document.getElementById("signInDiv").hidden = false;
+  function handleSignOut() {
+    setUser({});
+    setIsLoggedIn(false);
+    const signInDiv = document.getElementById("signInDiv");
+    if(signInDiv){    
+      signInDiv.hidden = false;
+    }
   }
 
   return (
@@ -63,14 +70,14 @@ function Home() {
           <div className='border-div'>
             <div className='home-cont'>
               <div className='head-cont'>
-                <div className='sub-head-cont' >
+                <div className='sub-head-cont' style={{padding:"2%"}} >
                   <h1 style={{fontSize:"7vh"}}>charcha</h1>
-                  {user.name ?
+                  {isLoggedIn ? (
                     <div>
-                      <button onClick={(e) => handleSignOut(e)}>Logout</button>
+                      <button onClick={handleSignOut}>Logout</button>
                       <h3 style={{ marginTop: "15%" }}>Hi {user.name}</h3>
                     </div>
-                    :
+                  ) : (
                     <div style={{padding:"5%"}}>
                       <Link to="/login">
                         {/* <img src={User} alt="User Sign In" style={{ height: "50px", marginTop: "2.5%", cursor: "pointer", display: 'flex', flex: 'row-reverse' }} /> */}
@@ -78,7 +85,7 @@ function Home() {
                       <div id="signInDiv" style={{width:"50px"}}></div>
                       <h3 style={{textWrap:"wrap",position:"relative"}}>Hi,sign in to continue.</h3>
                     </div>
-                  }
+                  )}
                 </div>
               </div>
               <div className='rows'>
