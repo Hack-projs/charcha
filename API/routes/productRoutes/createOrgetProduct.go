@@ -36,13 +36,6 @@ func CreateOrGetProduct(c *fiber.Ctx) error {
 		return c.Status(200).JSON("Product already exists")
 	}
 
-	// Create a new product
-	if err := tx.Create(&product).Error; err != nil {
-		// Rollback the transaction if there's an error creating the product
-		tx.Rollback()
-		return c.Status(500).SendString("Error creating product")
-	}
-
 	// Run Python script if product doesn't exist
 	cmd := exec.Command("python", "D:/Charcha/charcha/API/execs/wrapper.py ", product.Name)
 	// cmd.Stdin = strings.NewReader(product.Name)
@@ -68,6 +61,13 @@ func CreateOrGetProduct(c *fiber.Ctx) error {
 	product.PositiveRatings = sentimentResponse.Positive
 	product.NegativeRatings = sentimentResponse.Negative
 	product.NeutralRatings = sentimentResponse.Neutral
+
+	// Create a new product
+	if err := tx.Create(&product).Error; err != nil {
+		// Rollback the transaction if there's an error creating the product
+		tx.Rollback()
+		return c.Status(500).SendString("Error creating product")
+	}
 
 	// Commit the transaction if everything is successful
 	tx.Commit()
