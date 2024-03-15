@@ -44,5 +44,14 @@ def get_reviews(url):
         review_texts.extend([review.text.strip() for review in reviews])
     return review_texts
 
+def save_to_csv(comments, filename):
+    with open(filename, 'w', newline='', encoding='utf-8') as file:
+        writer = csv.writer(file)
+        writer.writerow(['reviewText'])
+        for comment in comments:
+            # Replace newline characters with spaces
+            comment = comment.lower().replace('\n', ' ')
+            writer.writerow([comment])
+
 bookTitle = input("Enter book name: ")
 bookSearch(bookTitle)
