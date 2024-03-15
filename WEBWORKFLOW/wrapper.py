@@ -1,8 +1,10 @@
+import sys
 from scraper import start_scrape
 import time
 
-def main():
-    string = str(input("Enter product to be searched: "))
+def main(string):
+    # string = str(input("Enter product to be searched: "))
+    
     print("Scraping Comments...")
     start_scrape(string)
     print("Scraping Completed!")
@@ -20,4 +22,5 @@ def main():
     
     
 if __name__ == "__main__":
-    main()
+    string = str(sys.argv[1])
+    main(string)
