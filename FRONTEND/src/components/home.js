@@ -15,7 +15,6 @@ const google = window.google;
 
 function Home() {
   const [isGoogleScriptLoaded, setIsGoogleScriptLoaded] = useState(false);
-  
 
   useEffect(() => {
     const script = document.createElement('script');
