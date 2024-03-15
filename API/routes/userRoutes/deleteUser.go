@@ -1,4 +1,4 @@
-package routes
+package userRoutes
 
 import (
 	"charcha-api/database"
