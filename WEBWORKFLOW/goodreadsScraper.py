@@ -1,6 +1,7 @@
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup
+import csv
 
 def bookSearch(bookName):
     base_url = f"https://www.goodreads.com/search?q={bookName}"
