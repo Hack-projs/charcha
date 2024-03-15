@@ -135,13 +135,11 @@ function Profile() {
                                             <h1>Profile</h1>
                                             <img src={arrowW} style={{ height: "60px", marginLeft: "53%" }} />
                                         </div>
-                                        <div className='profile-cont' style={{backgroundColor:"white",height:"50%",marginTop:"50%",width:"80%",marginLeft:"20px",borderRadius:"20px",opacity:"90%",color:"rgb(71, 97, 110)",padding:"5%",fontSize:"25px",display:"flex",alignItems:"center",justifyContent:"center"}}>
-                                            <div className='name-cont'>
-                                            NAME<br/><br/>EMAIL<br/><br/>CONTACT<br/>
-                                            </div>
-                                            
+                                        <div className='profile-cont' style={{backgroundColor:"white"}}>
+                                
                                         </div>
-                                        
+                                        Our project, "charcha" aims to provide companies and creators with a tool to accurately get an Idea of the overall customer reception and public opinion of their product(songs,game,movies,books) . Providing better insights by aggregating data from various sources, such as user reviews, ratings and social media mentions(x, threads ,imd, goodreads  etc.). This will further enable users to make informed decisions about which product to push and marketing flaws.
+                        We plan to create a subscription model for webscraping the sites using an ml model for processing the user sentiment and displaying it to the user in informative formats like charts graphs and statistics.
                                     </div>
                                     {/* <div className='child-row2' style={{ backgroundColor: "rgb(123, 112, 255)", color: "white", borderRadius: "6%" }}>
                                         <div className='sub-head-cont'>
