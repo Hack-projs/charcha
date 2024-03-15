@@ -1,0 +1,134 @@
+body{
+  /* background-image: url('https://www.shutterstock.com/image-vector/female-avatar-set-no-faces-260nw-1894548661.jpg'); */
+  /* background-image: url('../profile-icon-male-and-female-avatar-woman-man-cartoon-portrait-mix-HE2G04.jpg'); */
+  /* background-color: antiquewhite; */
+}
+
+.home-cont {
+  padding: 0.5%;
+  border-radius: 3%;
+  box-shadow:  0px 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column; /* Change to column to stack elements vertically */
+  align-items: center;
+  background-color: white;
+  height: 60%;
+  width: 60%;
+  margin: 10% auto; /* Adjust margin to center vertically and horizontally */
+  gap: 10px;
+}
+
+.head-cont {
+  width:100%;
+  margin-top: -10px;
+  margin-bottom: -10px;
+  margin-left: 5%;
+}
+
+.rows{
+  display: flex;
+  flex-direction: row;
+}
+
+.row-1,
+.row-2{
+  flex:1;
+}
+
+.child-row1,
+.child-row2 {
+  display: flex;
+  padding: 3%;
+  flex-direction: column;
+  /* background-color: aqua; */
+  margin: 6px; 
+  
+  box-shadow:  0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.child-row1{
+  border-radius: 6%;
+}
+
+
+
+.child-row1:hover,
+.child-row2:hover {
+  transform: scale(1.02); /* Magnify on hover */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Add shadow on hover */
+  
+  cursor: pointer;
+}
+
+.button-cont-1,
+.button-cont-2{
+  display: flex;
+  justify-content: center;
+  padding: 0.2%;
+  
+
+}
+.button-cont-1{
+  margin-top: 4%;
+}
+.child-row1 button,
+.child-row2 button{
+  padding: 5%;
+  border: none; /* Remove border */
+  border-radius: 10px; /* Adjust border radius for smoother corners */
+  transition: all 0.3s ease; /* Add transition for smoother hover effect */
+  margin: 4%;
+}
+.child-row1 button:hover,
+.child-row2 button:hover{
+  transform: scale(1.02); /* Magnify on hover */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Add shadow on hover */
+  cursor: pointer;
+}
+
+
+
+/* .button-cont-1 button,
+.button-cont-2 button{
+  padding: 5%;
+  border-radius: 40%;
+} */
+
+.button-cont-1 button,
+.button-cont-2 button {
+  padding: 5%;
+  border: none; /* Remove border */
+  border-radius: 10px; /* Adjust border radius for smoother corners */
+  transition: all 0.3s ease; /* Add transition for smoother hover effect */
+  margin: 1%;
+}
+
+.button-cont-1 button:hover,
+.button-cont-2 button:hover {
+  transform: scale(1.1); /* Magnify on hover */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Add shadow on hover */
+  cursor: pointer;
+}
+.child-row-2-cont{
+  display: flex;
+  flex-direction: row;
+}
+
+.sub-head-cont{
+  display: flex;
+}
+.border-cont{
+  display: flex;
+  justify-content: center;
+
+  
+  
+}
+/* .border-div{
+  border: 2px solid black;
+  background-color: transparent;
+  display: flex;
+  height: fit-content;
+  width: fit-content;
+} */
