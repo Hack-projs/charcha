@@ -3,13 +3,13 @@ from nltk.tokenize import RegexpTokenizer
 import pickle
 import pandas as pd
 import json
+import syspath
+
+modelfile = syspath.localpath.finalized_model
 
 
-modelfile = 'D:/Charcha/charcha/API/execs/finalized_model.sav'
 
-
-
-data = pd.read_csv('D:/Charcha/charcha/API/execs/amazon.csv')
+data = pd.read_csv(syspath.localpath.amazon_comments)
 token = RegexpTokenizer(r'[a-zA-Z0-9]+')
 cv = CountVectorizer(stop_words='english', ngram_range=(
     1, 1), tokenizer=token.tokenize)
@@ -20,7 +20,7 @@ loaded_model = pickle.load(open(modelfile, 'rb'))
 
 
 
-df = pd.read_csv('D:/Charcha/charcha/API/execs/reddit_comments.csv')
+df = pd.read_csv(syspath.localpath.reddit_comments)
 
 
 def run_analysis(text):

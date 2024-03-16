@@ -19,7 +19,7 @@ type SentimentResponse struct {
 
 func CreateOrGetProduct(c *fiber.Ctx) error {
 	var product models.Product
-
+	wrapperPath := "D:/Charcha/charcha/API/execs/wrapper.py"
 	// Check for errors in parsing JSON
 	if err := c.BodyParser(&product); err != nil {
 		return c.Status(400).JSON(fmt.Sprintf("Error parsing JSON: %v", err))
@@ -37,7 +37,7 @@ func CreateOrGetProduct(c *fiber.Ctx) error {
 	}
 
 	// Run Python script if product doesn't exist
-	cmd := exec.Command("python", "D:/Charcha/charcha/API/execs/wrapper.py ", product.Name)
+	cmd := exec.Command("python", wrapperPath, " ", product.Name)
 	// cmd.Stdin = strings.NewReader(product.Name)
 	output, err := cmd.Output()
 	log.Printf("%s", output)

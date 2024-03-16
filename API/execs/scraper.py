@@ -1,6 +1,7 @@
 import csv
 import requests
 from bs4 import BeautifulSoup
+import syspath
 
 def scrape_reddit_comments(topic, num_pages=10):
     base_url = f"https://www.reddit.com/search/?q={topic}&type=comment"
@@ -34,7 +35,7 @@ def start_scrape(inputtext):
     topic_to_scrape = inputtext
     num_pages_to_scrape = 10
     comments = scrape_reddit_comments(topic_to_scrape, num_pages_to_scrape)
-    csv_filename = 'D:/Charcha/charcha/API/execs/reddit_comments.csv'
+    csv_filename = syspath.localpath.reddit_comments
     save_to_csv(comments, csv_filename)
     # print(f"Comments saved to {csv_filename}.")
 #--------------------------------------------------REDDIT SCRAPER ENDS HERE --------------------------------------------------#
